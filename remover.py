@@ -2,11 +2,19 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from tkinter import *
 from tkinter.filedialog import *
 import PyPDF2 as pypdf
+import sys, os
+
+
+
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 
 root=Tk()
 root.title('Answers Hider')
-root.iconbitmap('icon.ico')
+#root.iconbitmap( resource_path('./icon.ico'))
 pdf_list = []
 
 
@@ -49,9 +57,11 @@ def remove_images():
 ##Label(root, text="Rectangles remover").grid(row=0, column=2, sticky=E)
 Button(root, text="Choose file", command=load1).grid(row=1, column=0)
 Label(root, textvariable=filename1,width=20).grid(row=1, column=1, sticky=(N,S,E,W))
-photo= PhotoImage(file='button_pic.png')
+#photo= PhotoImage(file=resource_path('./button_pic.png'))
 
-Button(root, text="Remove answers",image=photo, command=remove_images, width=100, height=120).grid(row=1, column=2,sticky=E)
+#Button(root, text="Remove answers",image=photo, command=remove_images, width=100, height=120).grid(row=1, column=2,sticky=E)
+Button(root, text="Remove answers", command=remove_images).grid(row=1, column=2,sticky=E)
+
 #Label(root, text="Remove Answers^^").grid(row=2, column=2, sticky=E)
 Label(root, text="Good Luck!").grid(row=2, column=0, sticky=W)
 
@@ -59,4 +69,7 @@ for child in root.winfo_children():
     child.grid_configure(padx=10,pady=10)
 
 root.mainloop()
+
+
+
 
